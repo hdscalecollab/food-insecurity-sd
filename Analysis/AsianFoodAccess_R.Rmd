@@ -37,10 +37,8 @@ FullDataset <- read_excel("FullDataset_Final.xlsx",
 ## Descriptive Statistics of the Dependent Variable and Covariates
 
 ```{r descriptives of the Dependent Variable and Covariates}
-#Mean and standard deviation of Asian American and Pacific Islander (AAPI)
-#Diabetes Rate of all San Diego Census Tracts (CTs)
-#Unit: number of hospitalizations and emergency department discharges for 
-#diabetes per 100,000 AAPI population per year
+#Mean and standard deviation of Asian American and Pacific Islander (AAPI) Diabetes Rate of all San Diego Census Tracts (CTs)
+#Unit: number of hospitalizations and emergency department discharges for diabetes per 100,000 AAPI population per year
 FullDataset %>%
   summarize(mean(Diabetes_Rate),
             sd(Diabetes_Rate))%>%
@@ -53,24 +51,21 @@ FullDataset %>%
             sd(Percent_AAPI)) %>%
   kable()
 
-#Mean and standard deviation of Percent below 200% Poverty Line of all 
-#San Diego CTs
+#Mean and standard deviation of Percent below 200% Poverty Line of all San Diego CTs
 FullDataset %>%
   filter(Percent_Below_200_Poverty != "NA") %>%
   summarize(mean(Percent_Below_200_Poverty),
             sd(Percent_Below_200_Poverty))%>%
   kable()
 
-#Mean and standard deviation of Percent of Population over 65 of all San Diego 
-#CTs
+#Mean and standard deviation of Percent of Population over 65 of all San Diego CTs
 FullDataset %>%
   filter(Over65Percent != "NA") %>%
   summarize(mean(Over65Percent),
             sd(Over65Percent))%>%
   kable()
 
-#Mean and standard deviation of Percent of Population who are obese of all 
-#San Diego CTs
+#Mean and standard deviation of Percent of Population who are obese of all San Diego CTs
 FullDataset %>%
   filter(Obesity_Percent != "NA") %>%
   summarize(mean(Obesity_Percent),
@@ -89,65 +84,56 @@ FullDataset %>%
 ## Descriptive Statistics of Independent (Food Access) Variables
 
 ```{r descriptives of Food Access Variables}
-#Mean and standard deviation of percent of CT population >½ mile to the 
-#nearest supermarket of the 564 out of 626 San Diego CTs with data available
+#Mean and standard deviation of percent of CT population >½ mile to the nearest supermarket of the 564 out of 626 San Diego CTs with data available
 FullDataset %>%
   filter(lapophalfshare != "NA") %>%
   summarize(mean(lapophalfshare),
             sd(lapophalfshare))%>%
   kable()
 
-#Mean and standard deviation of percent of CT’s AAPI population >½ mile 
-#to the nearest supermarket of the 564 out of 626 San Diego CTs with 
-#data available
+#Mean and standard deviation of percent of CT’s AAPI population >½ mile to the nearest supermarket of the 564 out of 626 San Diego CTs with data available
 FullDataset %>%
   filter(laaapihalfshare != "NA") %>%
   summarize(mean(laaapihalfshare),
             sd(laaapihalfshare))%>%
   kable()
 
-#Mean and standard deviation of the Yelp ratio of Asian restaurants to 
-#non-Asian restaurants of all San Diego CTs 
+#Mean and standard deviation of the Yelp ratio of Asian restaurants to non-Asian restaurants of all San Diego CTs 
 FullDataset %>%
   filter(ratio_AR_2_NAR_adj != "NA") %>%
   summarize(mean(ratio_AR_2_NAR_adj),
             sd(ratio_AR_2_NAR_adj))%>%
   kable()
 
-#Mean and standard deviation of the Yelp ratio of Asian groceries to 
-#non-Asian groceries of all San Diego CTs 
+#Mean and standard deviation of the Yelp ratio of Asian groceries to non-Asian groceries of all San Diego CTs 
 FullDataset %>%
   filter(ratio_AG_2_NAG_adj != "NA") %>%
   summarize(mean(ratio_AG_2_NAG_adj),
             sd(ratio_AG_2_NAG_adj))%>%
   kable()
 
-#Mean and standard deviation of the Yelp ratio of Asian restaurants to 
-#AAPI population of all San Diego CTs 
+#Mean and standard deviation of the Yelp ratio of Asian restaurants to AAPI population of all San Diego CTs 
 FullDataset %>%
   filter(ratio_AR_2_AAPI != "NA") %>%
   summarize(mean(ratio_AR_2_AAPI),
             sd(ratio_AR_2_AAPI))%>%
   kable()
 
-#Mean and standard deviation of the Yelp ratio of Asian groceries to 
-#AAPI population of all San Diego CTs 
+#Mean and standard deviation of the Yelp ratio of Asian groceries to AAPI population of all San Diego CTs 
 FullDataset %>%
   filter(ratio_AG_2_AAPI != "NA") %>%
   summarize(mean(ratio_AG_2_AAPI),
             sd(ratio_AG_2_AAPI))%>%
   kable()
 
-#Mean and standard deviation of the Yelp proportion of CT Asian restaurants 
-#to the total number of Asian restaurants in San Diego of all San Diego CTs
+#Mean and standard deviation of the Yelp proportion of CT Asian restaurants to the total number of Asian restaurants in San Diego of all San Diego CTs
 FullDataset %>%
   filter(proportion_ctAR_2_sdAR != "NA") %>%
   summarize(mean(proportion_ctAR_2_sdAR),
             sd(proportion_ctAR_2_sdAR))%>%
   kable()
 
-#Mean and standard deviation of the Yelp proportion of CT Asian groceries 
-#to the total number of Asian groceries in San Diego of all San Diego CTs
+#Mean and standard deviation of the Yelp proportion of CT Asian groceries to the total number of Asian groceries in San Diego of all San Diego CTs
 FullDataset %>%
   filter(proportion_ctAG_2_sdAG != "NA") %>%
   summarize(mean(proportion_ctAG_2_sdAG),
@@ -161,8 +147,7 @@ Correlation matrices were calculated to examine the correlation among the covari
 (first matrix) and among the food access variables (second matrix)
 
 ```{r correlation-matrix-1, fig.height=8, fig.width=12}
-#A subset of variables were selected from the FullDataset to run a correlation
-#matrix among the covariates
+#A subset of variables were selected from the FullDataset to run a correlation matrix among the covariates
 CovariateSubset <- FullDataset [c(2,3, 11:13)] %>%
   rename(FARA_AAPI = laaapihalfshare,
          Population_Density = Density2019,
@@ -172,9 +157,8 @@ correlation_covariate<-cor(CovariateSubset, method="spearman",
                            use="pairwise.complete.obs")
 
 #In the correlation matrix, a correlation coefficient was shown in each cell.
-#A red filling in the cell indicated a positive correlation, and a blue filling 
-#indicated a negative correlation. The P value for each correlation was also
-#calculated.Correlations with p>.05 were crossed out in the matrix.
+#A red filling in the cell indicated a positive correlation, and a blue filling indicated a negative correlation. 
+#The P value for each correlation was also calculated.Correlations with p>.05 were crossed out in the matrix.
 pmatrix <- cor.mtest(CovariateSubset, conf.level = .95)
 corrplot(correlation_covariate, p.mat = pmatrix$p, sig.level = .05,
          insig = "pch", pch.cex = 3, pch.col = "red", type = "lower",
@@ -183,8 +167,7 @@ corrplot(correlation_covariate, p.mat = pmatrix$p, sig.level = .05,
 ```
 
 ```{r correlation-matrix-2, fig.height=8, fig.width=12}
-#A subset of variables were selected from the FullDataset to run a correlation
-#matrix among the food access variables
+#A subset of variables were selected from the FullDataset to run a correlation matrix among the food access variables
 FoodAccessSubset <- FullDataset [c(2:4, 14:19)] %>%
   rename(FARA_AAPI = laaapihalfshare,
          FARA_CT = lapophalfshare,
@@ -198,10 +181,8 @@ correlation_foodaccess<-cor(FoodAccessSubset, method="spearman",
                             use="pairwise.complete.obs")
 
 #In the correlation matrix, a correlation coefficient was shown in each cell.
-#A red filling in the cell indicated a positive correlation, and a blue filling 
-#indicated a negative correlation. The P value for each correlation was also
-#calculated (shown in the p matrix).Correlations with p>.05 were crossed out 
-#in the matrix.
+#A red filling in the cell indicated a positive correlation, and a blue filling indicated a negative correlation. 
+#The P value for each correlation was also calculated (shown in the p matrix).Correlations with p>.05 were crossed out in the matrix.
 pmatrix <- cor.mtest(FoodAccessSubset, conf.level = .95)
 corrplot(correlation_foodaccess, p.mat = pmatrix$p, sig.level = .05,
          insig = "pch", pch.cex = 3, pch.col = "red", type = "lower",
@@ -227,96 +208,84 @@ population over 65, and percent of population who are obese.
 ## 1. OLS Model with FARA_AAPI
 
 ```{r FARA_AAPI OLS}
-#Food Access Variable: percent of CT’s AAPI population >½ mile to the nearest 
-#supermarket
+#Food Access Variable: percent of CT’s AAPI population >½ mile to the nearest supermarket
 summary(glmFARA_AAPI <- glm(Diabetes_Rate ~ scale(laaapihalfshare) +
                    scale(Density2019) + scale(Over65Percent) + 
                      scale(Obesity_Percent),
         data = FullDataset, na.action = na.exclude))
 confint(glmFARA_AAPI)
 
-#Residuals of the OLS model were exported to a new column in FullDataset,
-#"FARA_AAPI"
+#Residuals of the OLS model were exported to a new column in FullDataset, "FARA_AAPI"
 FullDataset$FARA_AAPI <- resid(glmFARA_AAPI, "pearson")
 ```
 
 ## 2. OLS Model with AR_NAR
 
 ```{r AR_NAR OLS}
-#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT non-Asian 
-#restaurants
+#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT non-Asian restaurants
 summary(glmAR_NAR <- glm(Diabetes_Rate ~ scale(ratio_AR_2_NAR_adj) +
                        scale(Density2019) + scale(Over65Percent) + 
                          scale(Obesity_Percent),
         data = FullDataset, na.action = na.exclude))
 confint(glmAR_NAR)
 
-#Residuals of the OLS model were exported to a new column in FullDataset,
-#"AR_NAR"
+#Residuals of the OLS model were exported to a new column in FullDataset, "AR_NAR"
 FullDataset$AR_NAR <- resid(glmAR_NAR, "pearson")
 ```
 
 ## 3. OLS Model with AG_NAG
 
 ```{r AG_NAG OLS}
-#Food Access Variable: the Yelp ratio of CT Asian groceries to CT non-Asian 
-#groceries
+#Food Access Variable: the Yelp ratio of CT Asian groceries to CT non-Asian groceries
 summary(glmAG_NAG <- glm(Diabetes_Rate ~ scale(ratio_AG_2_NAG_adj)
                   + scale(Density2019) + scale(Over65Percent) + 
                     scale(Obesity_Percent),
         data = FullDataset, na.action = na.exclude))
 confint(glmAG_NAG)
 
-#Residuals of the OLS model were exported to a new column in FullDataset,
-#"AG_NAG"
+#Residuals of the OLS model were exported to a new column in FullDataset, "AG_NAG"
 FullDataset$AG_NAG <- resid(glmAG_NAG, "pearson")
 ```
 
 ## 4. OLS Model with AR_AAPI
 
 ```{r AR_AAPI OLS}
-#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT AAPI 
-#population
+#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT AAPI population
 summary(glmAR_AAPI <- glm(Diabetes_Rate ~ scale(ratio_AR_2_AAPI) + 
                             scale(Density2019) + scale(Over65Percent) + 
                             scale(Obesity_Percent),
         data = FullDataset, na.action = na.exclude))
 confint(glmAR_AAPI)
 
-#Residuals of the OLS model were exported to a new column in FullDataset,
-#"AR_AAPI"
+#Residuals of the OLS model were exported to a new column in FullDataset, "AR_AAPI"
 FullDataset$AR_AAPI <- resid(glmAR_AAPI, "pearson")
 ```
 
 ## 5. OLS Model with AG_AAPI
 
 ```{r AG_AAPI OLS}
-#Food Access Variable: the Yelp ratio of CT Asian groceries to CT AAPI 
-#population
+#Food Access Variable: the Yelp ratio of CT Asian groceries to CT AAPI population
 summary(glmAG_AAPI <- glm(Diabetes_Rate ~ scale(ratio_AG_2_AAPI) + 
                             scale(Density2019) + scale(Over65Percent) + 
                             scale(Obesity_Percent),
         data = FullDataset, na.action = na.exclude))
 confint(glmAG_AAPI)
 
-#Residuals of the OLS model were exported to a new column in FullDataset,
-#"AG_AAPI"
+#Residuals of the OLS model were exported to a new column in FullDataset, "AG_AAPI"
 FullDataset$AG_AAPI <- resid(glmAG_AAPI, "pearson")
 ```
 
 ## 6. OLS Model with ctAG_sdAG
 
 ```{r ctAG_sdAG OLS}
-#Food Access Variable: the Yelp proportion of CT Asian grocery stores to the 
-#total number of Asian grocery stores in San Diego County
+#Food Access Variable: the Yelp proportion of CT Asian grocery stores to the total number of Asian grocery stores in San Diego County
 summary(glmctAG_sdAG <- glm(Diabetes_Rate ~ scale(proportion_ctAG_2_sdAG) + 
                               scale(Density2019) + scale(Over65Percent) + 
                               scale(Obesity_Percent),
         data = FullDataset, na.action = na.exclude))
 confint(glmctAG_sdAG)
 
-#Residuals of the OLS model were exported to a new column in FullDataset,
-#"ctAG_sdAG"
+#Residuals of the OLS model were exported to a new column in FullDataset, "ctAG_sdAG"
 FullDataset$ctAG_sdAG <- resid(glmctAG_sdAG, "pearson")
 ```
 
@@ -359,96 +328,84 @@ to calculate standardized coefficients.
 ## 1. SLR Model with FARA_AAPI
 
 ```{r FARA_AAPI SLR}
-##Food Access Variable: percent of CT’s AAPI population >½ mile to the nearest 
-#supermarket
+#Food Access Variable: percent of CT’s AAPI population >½ mile to the nearest supermarket
 summary(FARA_AAPI_SLR <- lagsarlm(Diabetes_R ~ scale(laaapihalf) + 
                                     scale(Density201) + scale(Over65Perc) + 
                                     scale(Obesity_Pe),
                           data = SpatialDataset, na.action = na.exclude, 
                           listw = SpatialDatasetW))
 
-#Residuals of the SLR model were exported to a new column in FullDataset,
-#"FARA_AAPI_SLR"
+#Residuals of the SLR model were exported to a new column in FullDataset, "FARA_AAPI_SLR"
 FullDataset$FARA_AAPI_SLR <- resid(FARA_AAPI_SLR, "pearson")
 ```
 
 ## 2. SLR Model with AR_NAR
 
 ```{r AR_NAR SLR}
-#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT non-Asian 
-#restaurants
+#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT non-Asian restaurants
 summary(AR_NAR_SLR <- lagsarlm(Diabetes_R ~ scale(ratio_AR_2) + 
                                  scale(Density201) + scale(Over65Perc) + 
                                  scale(Obesity_Pe),
                           data = SpatialDataset, na.action = na.exclude, 
                           listw = SpatialDatasetW))
 
-#Residuals of the SLR model were exported to a new column in FullDataset,
-#"AR_NAR_SLR"
+#Residuals of the SLR model were exported to a new column in FullDataset, "AR_NAR_SLR"
 FullDataset$AR_NAR_SLR <- resid(AR_NAR_SLR, "pearson")
 ```
 
 ## 3. SLR Model with AG_NAG
 
 ```{r AG_NAG SLR}
-#Food Access Variable: the Yelp ratio of CT Asian groceries to CT non-Asian 
-#groceries
+#Food Access Variable: the Yelp ratio of CT Asian groceries to CT non-Asian groceries
 summary(AG_NAG_SLR <- lagsarlm(Diabetes_R ~ scale(ratio_AG_2) + 
                                  scale(Density201) + scale(Over65Perc) + 
                                  scale(Obesity_Pe),
                           data = SpatialDataset, na.action = na.exclude, 
                           listw = SpatialDatasetW))
 
-#Residuals of the SLR model were exported to a new column in FullDataset,
-#"AG_NAG_SLR"
+#Residuals of the SLR model were exported to a new column in FullDataset, "AG_NAG_SLR"
 FullDataset$AG_NAG_SLR <- resid(AG_NAG_SLR, "pearson")
 ```
 
 ## 4. SLR Model with AR_AAPI
 
 ```{r AR_AAPI SLR}
-#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT AAPI 
-#population
+#Food Access Variable: the Yelp ratio of CT Asian restaurants to CT AAPI population
 summary(AR_AAPI_SLR <- lagsarlm(Diabetes_R ~ scale(ratio_AR_3) + 
                                   scale(Density201) + scale(Over65Perc) + 
                                   scale(Obesity_Pe),
                           data = SpatialDataset, na.action = na.exclude, 
                           listw = SpatialDatasetW))
 
-#Residuals of the SLR model were exported to a new column in FullDataset,
-#"AR_AAPI_SLR"
+#Residuals of the SLR model were exported to a new column in FullDataset, "AR_AAPI_SLR"
 FullDataset$AR_AAPI_SLR <- resid(AR_AAPI_SLR, "pearson")
 ```
 
 ## 5. SLR Model with AG_AAPI
 
 ```{r AG_AAPI SLR}
-#Food Access Variable: the Yelp ratio of CT Asian groceries to CT AAPI 
-#population
+#Food Access Variable: the Yelp ratio of CT Asian groceries to CT AAPI population
 summary(AG_AAPI_SLR <- lagsarlm(Diabetes_R ~ scale(ratio_AG_3) + 
                                   scale(Density201) + scale(Over65Perc) + 
                                   scale(Obesity_Pe),
                           data = SpatialDataset, na.action = na.exclude, 
                           listw = SpatialDatasetW))
 
-#Residuals of the SLR model were exported to a new column in FullDataset,
-#"AG_AAPI_SLR"
+#Residuals of the SLR model were exported to a new column in FullDataset, "AG_AAPI_SLR"
 FullDataset$AG_AAPI_SLR <- resid(AG_AAPI_SLR, "pearson")
 ```
 
 ## 6. SLR Model with ctAG_sdAG
 
 ```{r ctAG_sdAG SLR}
-#Food Access Variable: the Yelp proportion of CT Asian grocery stores to the 
-#total number of Asian grocery stores in San Diego County
+#Food Access Variable: the Yelp proportion of CT Asian grocery stores to the total number of Asian grocery stores in San Diego County
 summary(ctAG_sdAG_SLR <- lagsarlm(Diabetes_R ~ scale(proporti_1) + 
                                     scale(Density201) + scale(Over65Perc) + 
                                     scale(Obesity_Pe),
                           data = SpatialDataset, na.action = na.exclude, 
                           listw = SpatialDatasetW))
 
-#Residuals of the SLR model were exported to a new column in FullDataset,
-#"ctAG_sdAG_SLR"
+#Residuals of the SLR model were exported to a new column in FullDataset, "ctAG_sdAG_SLR"
 FullDataset$ctAG_sdAG_SLR <- resid(ctAG_sdAG_SLR, "pearson")
 
 ```
