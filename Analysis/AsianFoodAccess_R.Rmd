@@ -315,6 +315,7 @@ library(spdep)
 library(maptools)
 SpatialDataset <- readShapePoly("SpatialDataset.shp")
 
+# Building spatial weights using Queen contiguity
 SpatialDatasetnb <- poly2nb(SpatialDataset, queen = TRUE)
 SpatialDatasetW <- nb2listw(SpatialDatasetnb)
 ```
