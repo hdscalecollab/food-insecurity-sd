@@ -24,7 +24,11 @@ library(readxl)
 library(prettyR)
 options(digits = 4)
 options(scipen=4)
-FullDataset <- read_excel("FullDataset_Final.xlsx", 
+#Set working dir to this dir
+setwd(getwd())
+
+#Read Fulldata from /Data
+FullDataset <- read_excel("../Data/FullDataset_Input.xlsx", 
     col_types = c("numeric", "numeric", "numeric", "numeric", "text", 
                   "numeric", "numeric", "numeric", "numeric", "numeric",
                   "numeric", "numeric","numeric","numeric","numeric","numeric", 
@@ -289,22 +293,23 @@ confint(glmctAG_sdAG)
 FullDataset$ctAG_sdAG <- resid(glmctAG_sdAG, "pearson")
 ```
 
-# Export the New FullDataset with OLS Residuals as "FullDatasetNew.xlsx"
+# Export the New FullDataset with OLS Residuals as "FullDataset_with_OLS.xlsx"
 
 To test the spatial autocorrelation of OLS residuals, the new FullDataset with
-OLS residual columns was exported as "FullDatasetNew.xlsx" and imported
+OLS residual columns was exported as "FullDataset_with_OLS.xlsx" and imported
 into ArcGIS for spatial autocorrelation analyses.
 
 ```{r}
 library(rio)
-install_formats()
-export(FullDataset, "FullDatasetNew.xlsx")
+#Note: Un-comment the below line and run install_formats() if there is issue exporting the data to .xlsx
+# install_formats()
+export(FullDataset, "../Data/FullDataset_with_OLS.xlsx")
 ```
 
 # Spatial Lag Regression
 
-To prepare the dataset for spatial lag regression, the "FullDatasetNew" file 
-was first imported to ArcGIS to generate a shapefile for the spatial lag 
+To prepare the dataset for spatial lag regression, the "FullDataset_with_OLS.xlsx" file 
+was first imported to ArcGIS to generate a shapefile (SpatialDataset.*) for the spatial lag 
 regression. The shapefile was then exported from ArcGIS and imported into R as 
 "SpatialDataset"
 
@@ -312,8 +317,7 @@ regression. The shapefile was then exported from ArcGIS and imported into R as
 library(sf)
 library(spatialreg)
 library(spdep)
-library(maptools)
-SpatialDataset <- readShapePoly("SpatialDataset.shp")
+SpatialDataset <- st_read("../Data/SpatialDataset/SpatialDataset.shp")
 
 # Building spatial weights using Queen contiguity
 SpatialDatasetnb <- poly2nb(SpatialDataset, queen = TRUE)
@@ -411,16 +415,17 @@ FullDataset$ctAG_sdAG_SLR <- resid(ctAG_sdAG_SLR, "pearson")
 
 ```
 
-# Export the New FullDataset with SLR Residuals as "FullDatasetSpatial.xlsx"
+# Export the New FullDataset with SLR Residuals as "FullDataset_with_SLR.xlsx"
 
 To test the spatial autocorrelation of SLR residuals, the new FullDataset with
-SLR residual columns was exported as "FullDatasetSpatial.xlsx" and imported
+SLR residual columns was exported as "FullDataset_with_SLR.xlsx" and imported
 into ArcGIS for spatial autocorrelation analyses.
 
 ```{r FullDatasetSpatial}
 library(rio)
-install_formats()
-export(FullDataset, "FullDatasetSpatial.xlsx")
+#Note: Un-comment the below line and run install_formats() if there is issue exporting the data to .xlsx
+# install_formats()
+export(FullDataset, "../Data/FullDataset_with_SLR.xlsx")
 ```
 
 
