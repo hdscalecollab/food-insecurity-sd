@@ -220,7 +220,7 @@ correlation_covariate<-cor(CovariateSubset, method="spearman",
                            use="pairwise.complete.obs")
 
 #In the correlation matrix, a correlation coefficient was shown in each cell.
-#A red filling in the cell indicated a positive correlation, and a blue filling indicated a negative correlation. 
+#A red filling in the cell indicated a negative correlation, and a blue filling indicated a positive correlation. 
 #The P value for each correlation was also calculated.Correlations with p>.05 were crossed out in the matrix.
 pmatrix <- cor.mtest(CovariateSubset, conf.level = .95)
 corrplot(correlation_covariate, p.mat = pmatrix$p, sig.level = .05,
@@ -244,7 +244,7 @@ correlation_foodaccess<-cor(FoodAccessSubset, method="spearman",
                             use="pairwise.complete.obs")
 
 #In the correlation matrix, a correlation coefficient was shown in each cell.
-#A red filling in the cell indicated a positive correlation, and a blue filling indicated a negative correlation. 
+#A red filling in the cell indicated a negative correlation, and a blue filling indicated a positive correlation. 
 #The P value for each correlation was also calculated (shown in the p matrix).Correlations with p>.05 were crossed out in the matrix.
 pmatrix <- cor.mtest(FoodAccessSubset, conf.level = .95)
 corrplot(correlation_foodaccess, p.mat = pmatrix$p, sig.level = .05,
