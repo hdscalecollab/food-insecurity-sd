@@ -1,4 +1,4 @@
-# food-insecurity-sd
+# aapi-food-access-sd
 
 ## 1. Overview
 This repository hosts code snippets of analysis and data for the AAPI food access project in San Diego
